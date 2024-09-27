@@ -1,5 +1,4 @@
 const mongoose=require('mongoose');
-const {ProductCollection}=require('./db.js');
 const ProductSchema=new mongoose.Schema({
     name:{
         type:String,
@@ -23,5 +22,5 @@ const ProductSchema=new mongoose.Schema({
         unique:true
     }
 })
-const Product=ProductCollection.model('Product',ProductSchema)
+const Product=mongoose.model('Product' ,ProductSchema)
 module.exports=Product

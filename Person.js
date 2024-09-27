@@ -1,5 +1,4 @@
 const mongoose=require('mongoose')
-const {PersonCollection}=require('./db.js')
 const PersonSchema=new mongoose.Schema({
     name:{
         required:true,
@@ -30,5 +29,5 @@ const PersonSchema=new mongoose.Schema({
     }
 
 })
-const Person=PersonCollection.model("Person",PersonSchema);
+const Person=mongoose.model('Person',PersonSchema)
 module.exports=Person;

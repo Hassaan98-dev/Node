@@ -1,28 +1,16 @@
-const mongoose=require('mongoose');
-const PersonCollection=mongoose.createConnection('mongodb://127.0.0.1:27017/Person',{
-    useUnifiedTopology:true,
-    useNewUrLParser:true
+const mongoose = require('mongoose');
+require('dotenv').config()
+const mongoUrl=process.env.db_Url
+
+mongoose.connect(mongoUrl)
+const db=mongoose.connection;
+db.on('connected',()=>{
+    console.log('Connected to MONGODB')
 })
-const ProductCollection=mongoose.createConnection('mongodb://127.0.0.1:27017/Person',{
-    useUnifiedTopology:true,
-    useNewUrlParser:true
+db.on('disconnect',()=>{
+    console.log('disconnected from MONGODB')
 })
-ProductCollection.on('connected',()=>{
-    console.log("Product is connected to MongoDb")
+db.on('error',()=>{
+    console.log('Some error occured while connecting to MONGODB')
 })
-ProductCollection.on('disconnect',()=>{
-    console.log('Product is disconnect from MongoDb')
-})
-ProductCollection.on('error',(err)=>{
-  console.log('Some error occured while connecting Product to MongoDb')
-})
-PersonCollection.on('connected',()=>{
-    console.log('Person is connected to MongoDb')
-})
-PersonCollection.on('error',(err)=>{
-    console.log('Some Error occured while connection Person to MongoDb',err)
-})
-PersonCollection.on('disconnect',()=>{
-    console.log('Person disconnected to MongoDb')
-})
-module.exports={PersonCollection,ProductCollection};
+module.exports=db;
