@@ -2,6 +2,7 @@ const express=require('express');
 const route=express.Router();
 const Person=require('../Person.js');
 
+
 route.get('/:Profession',async(req,res)=>{
     try{
         const ProfessionType=req.params.Profession;
